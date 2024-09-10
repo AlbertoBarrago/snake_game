@@ -2,27 +2,40 @@
 import time
 from turtle import Screen
 from snake import Snake
+from food import Food
 
 GAME_IS_ON = True
-screen = Screen()
-screen.setup(width=600, height=600)
-screen.bgcolor("black")
-screen.title("Snake Game")
-screen.tracer(0)
+SCREEN = Screen()
+SCREEN.setup(width=600, height=600)
+SCREEN.bgcolor("black")
+SCREEN.title("Snake Game")
+SCREEN.tracer(0)
 
 snake = Snake()
+food = Food()
 
 while GAME_IS_ON:
-    screen.update()
+    SCREEN.update()
     time.sleep(0.1)
     snake.move_forward()
-    screen.listen()
-    screen.onkey(snake.up, "Up")
-    screen.onkey(snake.down, "Down")
-    screen.onkey(snake.right, "Right")
-    screen.onkey(snake.left, "Left")
-    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
+    SCREEN.listen()
+    SCREEN.onkey(snake.up, "Up")
+    SCREEN.onkey(snake.down, "Down")
+    SCREEN.onkey(snake.right, "Right")
+    SCREEN.onkey(snake.left, "Left")
+
+    # Detect collision with food
+    if snake.head.distance(food) < 15:
+        food.refresh()
+        snake.add_segment_after_eat()
+        print("nom nom nom")
+
+    # Detect collision with wall
+    if (snake.head.xcor() > 280 or
+            snake.head.xcor() < -280 or
+            snake.head.ycor() > 280 or
+            snake.head.ycor() < -280):
         GAME_IS_ON = False
         print("Game Over")
 
-screen.exitonclick()
+SCREEN.exitonclick()
