@@ -1,4 +1,4 @@
-# Snake Game (WORK in progess....)
+# Snake Game in Py
 
 A classic Snake game implemented in Python.
 
@@ -13,6 +13,9 @@ This project is a simple implementation of the popular Snake game. The player co
 - Snake grows longer when it eats food
 - Score tracking
 - Game over when snake collides with walls or itself
+
+# Screens
+![img.png](img.png)
 
 ## Requirements
 

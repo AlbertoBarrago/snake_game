@@ -43,4 +43,10 @@ while GAME_IS_ON:
         GAME_IS_ON = False
         score.game_over()
 
+    # Detect collision with tail
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < HEAD_DISTANCE - 1:
+            GAME_IS_ON = False
+            score.game_over()
+
 SCREEN.exitonclick()
