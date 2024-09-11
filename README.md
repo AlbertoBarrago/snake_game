@@ -20,7 +20,7 @@ This project is a simple implementation of the popular Snake game. The player co
 ## Requirements
 
 - Python 3.x
-- Pygame library
+- Turtle library (usually included with Python)
 
 ## Installation
 

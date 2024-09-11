@@ -7,7 +7,9 @@ from snake import Snake
 
 GAME_IS_ON = True
 HEAD_DISTANCE = 20
+HEAD_DISTANCE_TAIL = 10
 LIMIT_WALL_DISTANCE = 290
+
 SCREEN = Screen()
 SCREEN.setup(width=600, height=600)
 SCREEN.bgcolor("black")
@@ -45,7 +47,7 @@ while GAME_IS_ON:
 
     # Detect collision with tail
     for segment in snake.segments[1:]:
-        if snake.head.distance(segment) < HEAD_DISTANCE - 1:
+        if snake.head.distance(segment) < HEAD_DISTANCE_TAIL:
             GAME_IS_ON = False
             score.game_over()
 
