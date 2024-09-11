@@ -6,6 +6,8 @@ from score import Score
 from snake import Snake
 
 GAME_IS_ON = True
+HEAD_DISTANCE = 20
+LIMIT_WALL_DISTANCE = 290
 SCREEN = Screen()
 SCREEN.setup(width=600, height=600)
 SCREEN.bgcolor("black")
@@ -28,16 +30,16 @@ while GAME_IS_ON:
 
 
     # Detect collision with food
-    if snake.head.distance(food) < 15:
+    if snake.head.distance(food) < HEAD_DISTANCE:
         food.refresh()
         snake.add_segment_after_eat()
         score.increase_score()
 
     # Detect collision with wall
-    if (snake.head.xcor() > 280 or
-            snake.head.xcor() < -280 or
-            snake.head.ycor() > 280 or
-            snake.head.ycor() < -280):
+    if (snake.head.xcor() > LIMIT_WALL_DISTANCE or
+            snake.head.xcor() < -LIMIT_WALL_DISTANCE or
+            snake.head.ycor() > LIMIT_WALL_DISTANCE or
+            snake.head.ycor() < -LIMIT_WALL_DISTANCE):
         GAME_IS_ON = False
         score.game_over()
 
