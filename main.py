@@ -4,6 +4,7 @@ from turtle import Screen
 from food import Food
 from score import Score
 from snake import Snake
+from game_time import GameTimer
 
 GAME_IS_ON = True
 HEAD_DISTANCE = 20
@@ -19,11 +20,13 @@ SCREEN.tracer(0)
 snake = Snake()
 food = Food()
 score = Score()
+timer = GameTimer()
 
 while GAME_IS_ON:
     SCREEN.update()
     time.sleep(0.1)
     snake.move_forward()
+    timer.update_time()
     SCREEN.listen()
     SCREEN.onkey(snake.up, "Up")
     SCREEN.onkey(snake.down, "Down")
@@ -43,12 +46,14 @@ while GAME_IS_ON:
             snake.head.ycor() > LIMIT_WALL_DISTANCE or
             snake.head.ycor() < -LIMIT_WALL_DISTANCE):
         GAME_IS_ON = False
+        timer.stop_timer()
         score.game_over()
 
     # Detect collision with tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < HEAD_DISTANCE_TAIL:
             GAME_IS_ON = False
+            timer.stop_timer()
             score.game_over()
 
 SCREEN.exitonclick()
