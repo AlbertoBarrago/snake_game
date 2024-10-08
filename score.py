@@ -1,8 +1,6 @@
 """ Score module for snake game """
-from numbers import Number
 from turtle import Turtle
 
-HIGH_SCORE = open("score.txt", mode="r").read()
 
 class Score(Turtle):
     """
@@ -13,7 +11,8 @@ class Score(Turtle):
         super().__init__()
         self.score = 0
         self.color("white")
-        self.high_score = int(HIGH_SCORE)
+        with open("score.txt", mode="r") as file:
+            self.high_score = int(file.read())
         self.penup()
         self.goto(0, 270)
         self.hideturtle()
