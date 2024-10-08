@@ -15,7 +15,7 @@ This project is a simple implementation of the popular Snake game. The player co
 - Game over when snake collides with walls or itself
 
 # Screens
-![img_1.png](img_1.png)
+![img_1.png](img.png)
 
 ## Requirements
 
