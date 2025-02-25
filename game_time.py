@@ -12,7 +12,7 @@ class GameTimer(Turtle):
         self.penup()
         self.color("white")
         self.start_time = time.time()
-        self.is_game_active = True  # Track whether the game is active
+        self.is_game_active = True
         self.goto(0, -280)
         self.update_time()
 
