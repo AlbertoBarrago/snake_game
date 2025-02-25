@@ -22,38 +22,42 @@ food = Food()
 score = Score()
 timer = GameTimer()
 
-while GAME_IS_ON:
-    SCREEN.update()
-    time.sleep(0.1)
-    snake.move_forward()
-    timer.update_time()
-    SCREEN.listen()
-    SCREEN.onkey(snake.up, "Up")
-    SCREEN.onkey(snake.down, "Down")
-    SCREEN.onkey(snake.right, "Right")
-    SCREEN.onkey(snake.left, "Left")
+def start_game():
+    global GAME_IS_ON
+    while GAME_IS_ON:
+        SCREEN.update()
+        time.sleep(0.1)
+        snake.move_forward()
+        timer.update_time()
+        SCREEN.listen()
+        SCREEN.onkey(snake.up, "Up")
+        SCREEN.onkey(snake.down, "Down")
+        SCREEN.onkey(snake.right, "Right")
+        SCREEN.onkey(snake.left, "Left")
 
 
-    # Detect collision with food
-    if snake.head.distance(food) < HEAD_DISTANCE:
-        food.refresh()
-        snake.add_segment_after_eat()
-        score.increase_score()
+        # Detect collision with food
+        if snake.head.distance(food) < HEAD_DISTANCE:
+            food.refresh()
+            snake.add_segment_after_eat()
+            score.increase_score()
 
-    # Detect collision with wall
-    if (snake.head.xcor() > LIMIT_WALL_DISTANCE or
-            snake.head.xcor() < -LIMIT_WALL_DISTANCE or
-            snake.head.ycor() > LIMIT_WALL_DISTANCE or
-            snake.head.ycor() < -LIMIT_WALL_DISTANCE):
-        GAME_IS_ON = False
-        timer.stop_timer()
-        score.game_over()
-
-    # Detect collision with tail
-    for segment in snake.segments[1:]:
-        if snake.head.distance(segment) < HEAD_DISTANCE_TAIL:
+        # Detect collision with wall
+        if (snake.head.xcor() > LIMIT_WALL_DISTANCE or
+                snake.head.xcor() < -LIMIT_WALL_DISTANCE or
+                snake.head.ycor() > LIMIT_WALL_DISTANCE or
+                snake.head.ycor() < -LIMIT_WALL_DISTANCE):
             GAME_IS_ON = False
             timer.stop_timer()
             score.game_over()
 
-SCREEN.exitonclick()
+        # Detect collision with tail
+        for segment in snake.segments[1:]:
+            if snake.head.distance(segment) < HEAD_DISTANCE_TAIL:
+                GAME_IS_ON = False
+                timer.stop_timer()
+                score.game_over()
+    SCREEN.exitonclick()
+
+if __name__ == '__main__':
+    start_game()
